@@ -39,10 +39,12 @@ def convert_lhe(fname_in, fname_out="events.root"):
     pt   = array( 'f', [ 0 ] )
     rap  = array( 'f', [ 0 ] )
     spin = array( 'f', [ 0 ] )
+    mjj  = array( 'f', [ 0 ] )
     pTmp = r.TLorentzVector(1,1,0,5)
     p4   = r.TLorentzVector(1,1,0,5)
     med  = r.TLorentzVector(0,0,0,0)
-    
+    pTmpJ  = r.TLorentzVector(0,0,0,0)
+        
     t1.Branch("id",pdgid, "id/I")
     t1.Branch("event",bevent, "event/I")
     t1.Branch("status",status, "status/I")
@@ -53,6 +55,7 @@ def convert_lhe(fname_in, fname_out="events.root"):
     t1.Branch("mass",mass, "mass/F")
     t1.Branch("pt",pt, "pt/F")
     t1.Branch("rapidity",rap, "rapidity/F")
+    t1.Branch("mjj",mjj, "mjj/F")
     t1.Branch("spin",spin, "spin/F")
     t1.Branch("p4.","TLorentzVector",p4)
     count = 0
@@ -78,7 +81,17 @@ def convert_lhe(fname_in, fname_out="events.root"):
                 else:
                     med += pTmp
                 count = count + 1
+
+            if count == 4:
+                pTmpJ += pTmp
+                count = 0
+                mjj[0] = pTmpJ.M()
+                t1.Fill()
                 
+            if count == 3:
+                pTmpJ.SetPxPyPzE(pTmp.Px(),pTmp.Py(),pTmp.Pz(),pTmp.E())
+                count = count + 1
+
             if count == 2:
                 bevent[0] = ievt
                 pdgid[0] = evt_pdgid
@@ -92,12 +105,11 @@ def convert_lhe(fname_in, fname_out="events.root"):
                 rap[0]   = med.Rapidity()
                 spin[0] = evt_spin
                 p4.SetPxPyPzE(med.Px(),med.Py(),med.Pz(),med.E())
-                t1.Fill()
-                count = 0
+                count = count + 1
 
     t1.Print()
     t1.Write()
     f1.Close()
 
 if __name__ == "__main__":
-    convert_lhe("hahm_1j_mzp300_0p01_v2.lhe")
+    convert_lhe("vbf_h1.lhe")
