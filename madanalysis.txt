@@ -1,0 +1,5 @@
+#set main.currentdir = /uscms_data/d3/pharris/Prod2/ma5_v1_9_55
+set main.recast = on
+import $MA5HOME/Events/run_01/tag_1_pythia8_events.hepmc.gz
+submit output_test
+

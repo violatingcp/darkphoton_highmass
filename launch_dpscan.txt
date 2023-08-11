@@ -1,0 +1,8 @@
+launch monojet_test
+set epsilon 0.01
+set ptheavy 200
+set gdm 1.0
+set mZDinput scan: [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150]
+set MXd 1.0
+set decay 1023 auto
+0

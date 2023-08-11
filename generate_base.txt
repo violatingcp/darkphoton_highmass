@@ -1,0 +1,4 @@
+import HAHM_variableMW_v3_UFO
+generate p p > xd xd~ j 
+output monojet_test
+exit
