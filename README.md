@@ -7,7 +7,7 @@
 
 Step 1 Install Madgraph 
 
-'' 
+'''
 source /cvmfs/sft.cern.ch/lcg/views/LCG_99/x86_64-centos7-gcc8-dbg//setup.sh
 #source /cvmfs/sft.cern.ch/lcg/views/LCG_99/x86_64-centos7-gcc8-dbg//setup.csh
 
@@ -30,11 +30,15 @@ python write_param_card.py
 cd -		    
 ./bin/mg5_aMC generate_base.txt
 ./bin/mg5_aMC launch_dpscan.txt
-
+'''
 
 Step 2 Install Mad Analysis
+
+'''
 cd $MA5_BASE
 cp $DPHOME/delphes_card_cms_exo_20_004.tcl tools/PAD/Input/Cards/
 cp $DPHOME/madnalysis.txt .
 ./bin/ma5 -R madnalysis.txt
-''
+'''
+
+Step 3 translate limit for epsilon of 0.01 to coupling epsilon by noting it scales as sqrt(mu) (see notebook)
