@@ -18,12 +18,12 @@ export DPHOME=$PWD
 cd $MADGRAPH_BASE 
 ./bin/mg5_aMC
 install pythia8
-install delphes
+install Delphes
 exit
 export PYTHIA8DATA="/uscms_data/d3/pharris/Prod/tmp2/MG5_aMC_v2_9_16/HEPTools/pythia8/share/Pythia8/xmldoc/"
 
 cp $DPHOME/generate_base.txt .
-cp $DPHOME/launch_dpscapn.txt .
+cp $DPHOME/launch_dpscan.txt .
 cp -r $DPHOME/HAHM_variableMW_v3_UFO models
 cd models/HAHM_variableMW_v3_UFO
 python write_param_card.py
